@@ -1,13 +1,11 @@
-
 import './App.css'
+import { Demo } from './components'
 
 function App() {
 
   return (
     <>
-      <h1>
-        Drop File
-      </h1>
+      <Demo />
     </>
   )
 }
