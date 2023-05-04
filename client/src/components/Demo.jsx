@@ -8,9 +8,12 @@ const Demo = () => {
 
     const formData = new FormData();
     formData.append("file_upload",file);
-    
     try {
-      await fetch("")
+      await fetch("http://localhost:8080/api/v1/dropbox",{
+        method : "POST",
+        body : formData
+      });
+      console.log("Success to send file");
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +26,7 @@ const Demo = () => {
           type="file" 
           onChange={(e) =>  setFile(e.target.files[0])}
           />
-          <button type='submit' onSubmit={handleSubmit}>
+          <button type='submit' onClick={(e)=>handleSubmit(e)}>
               Upload*
           </button>
       </form>

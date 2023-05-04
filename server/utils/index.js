@@ -13,7 +13,7 @@ const Date_Now_String_For_Dir_Name = () => {
     const month = PadZero(String(date_now.getMonth() + 1));
     const year = date_now.getFullYear();
 
-    return `${day}_${month}_${year}`;
+    return `${day}-${month}-${year}`;
 }
 
 
