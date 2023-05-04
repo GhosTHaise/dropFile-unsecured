@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dropboxRouter from "./routes/dropboxRouter";
+import dropboxRouter from "../routes/dropboxRouter";
 
 const app = express();
 
