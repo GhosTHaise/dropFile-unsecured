@@ -22,7 +22,19 @@ Router.route("/").get((req,res)=>{
 Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
     const file = req.file;
 
-    dbx.filesUpload()
+    dbx.filesUpload({ 
+        path : Date_Now_String_For_Dir_Name()+"/"+file.filename,
+        contents : file.buffer
+    }).then(()=>{
+        console.log("File upload");
+        res.status(200).json({
+            message : "File Uploaded"
+        })
+    }).catch(e =>{
+        res.status(500).json({
+            message : "Something get wrong : "+ e
+        })
+    })
 });
 
 export default Router;
