@@ -3,7 +3,7 @@ import * as dotenv from "dotenv"
 import {Dropbox} from "dropbox";
 import multer from "multer";
 import {Date_Now_String_For_Dir_Name ,getAccessDropBoxUrl} from "../utils/index.js";
-import queryString from "query-string";
+
 
 dotenv.config();
 
@@ -14,11 +14,7 @@ const storage = multer.memoryStorage();
 const Upload = multer({ storage});
 
 //Create new instance of DropBox
-const dbx = new Dropbox({
-    //accessToken : process.env.DROPBOX_ACCESS_TOKEN,
-    clientId : process.env.DROPBOX_APP_KEY,
-    clientSecret : process.env.DROPBOX_APP_CLIENT
-});
+
 
 //GET
 Router.route("/").get((req,res)=>{
@@ -29,12 +25,17 @@ Router.route("/").get((req,res)=>{
 
 //POST
 Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
+    const dbx = new Dropbox({
+        //accessToken : process.env.DROPBOX_ACCESS_TOKEN,
+        //clientId : process.env.DROPBOX_APP_KEY,
+        //clientSecret : process.env.DROPBOX_APP_CLIENT
+    });
     const file = req.file;
     //console.log(file)
 
     
     //verify Access Token
-    dbx.usersGetCurrentAccount()
+/*     dbx.usersGetCurrentAccount()
     .then(()=>{
         console.log("APi Key still available !");
     }).catch((error) => {
@@ -44,7 +45,7 @@ Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
         }else{
             console.log(error);
         }
-    });
+    }); */
 
     dbx.filesUpload({ 
         path : "/"+Date_Now_String_For_Dir_Name()+"/"+file.originalname,
