@@ -12,11 +12,12 @@ function App() {
   useEffect(()=>{
     const queryParams = new URLSearchParams(window.location.search);
     const code_token_access = queryParams.get("code");
-    console.log(code_token_access);
+    
     if(code_token_access) {
       setServerDropBoxAccess((prev) => (
         {
           ...prev,
+          haveAccess : true,
           code : code_token_access
         }
       ));
@@ -46,7 +47,9 @@ function App() {
     {console.log(serverDropBoxAccess)}
       {
       serverDropBoxAccess.haveAccess ? 
-      <Demo />
+      <Demo
+        data={serverDropBoxAccess}
+      />
       :
       <button 
       className='px-8 py-4 bg-sky-700 text-white rounded-full'

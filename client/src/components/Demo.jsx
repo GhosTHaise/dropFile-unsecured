@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const Demo = () => {
+const Demo = ({data}) => {
   const [file, setFile] = useState();
 
   const handleSubmit = async (e) => {

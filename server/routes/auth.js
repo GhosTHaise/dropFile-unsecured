@@ -1,6 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
-import { getAccessDropBoxUrl } from "../utils/index.js";
+import { getAccessDropBoxUrl , getAccessTokenDropBox} from "../utils/index.js";
 
 dotenv.config();
 
@@ -16,8 +16,10 @@ Router.get("/",(req,res) => {
         res.status(200).json({
             haveAccess : true,
         })
-    
 });
 
+Router.post("/",(req,res) => {
+    getAccessTokenDropBox(req.body.code);
+});
 
 export default Router;
