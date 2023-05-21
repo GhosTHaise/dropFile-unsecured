@@ -1,4 +1,5 @@
-
+import * as dotenv from "dotenv";
+dotenv.config();
 
 /** 
 @param {string} _val 
@@ -16,7 +17,20 @@ const Date_Now_String_For_Dir_Name = () => {
     return `${day}-${month}-${year}`;
 }
 
+const getAccessDropBoxUrl = () => {
+    const queryParams = queryString.stringify({
+        response_type: 'code',
+        client_id: process.env.DROPBOX_APP_KEY,
+        redirect_uri: process.env.APP_REDIRECT_URL,
+        scope: 'files.metadata.read', 
+    })
+    const authUrl = `https://www.dropbox.com/oauth2/authorize?${queryParams}`;
+    
+    return authUrl;
+}
+
 
 export {
-    Date_Now_String_For_Dir_Name
+    Date_Now_String_For_Dir_Name,
+    getAccessDropBoxUrl
 }
