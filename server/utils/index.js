@@ -40,24 +40,41 @@ const getAccessTokenDropBox = async (code) => {
     const authorizationCode = code;
 
     //Request Data
-    const requestData = {
+    /* const requestData = {
         code: authorizationCode,
         grant_type: 'authorization_code',
         client_id: appKey,
         client_secret: appSecret,
         redirect_uri: redirectUri,
-      };
-    //Request my access Token
-    const response = await fetch(accessTokenUrl,{
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : new URLSearchParams(requestData)
-    })
+      }; */
 
-    const data = await response.json();
-    console.log(data);
+        const requestData = new URLSearchParams();
+        requestData.append('code', authorizationCode);
+        requestData.append('grant_type', 'authorization_code');
+        requestData.append('redirect_uri', redirectUri);
+
+        const authString = `${appKey}:${appSecret}`;
+        const authHeader = `Basic ${Buffer.from(authString).toString('base64')}`;
+
+   
+    return new Promise(async(resolve,reject)=>{
+        //Request my access Token
+        try {
+            const response = await fetch(accessTokenUrl,{
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/x-www-form-urlencoded",
+                    'Authorization': authHeader
+                },
+                body : requestData
+            });
+            const data = await response.json();
+            //console.log(data)
+            resolve(data.access_token)
+        } catch (error) {
+            reject("Get Error : "+error);
+        }
+    });
 }
 
 

@@ -20,7 +20,18 @@ Router.get("/",(req,res) => {
 
 Router.post("/",(req,res) => {
     console.log("body :",req.body);
-    getAccessTokenDropBox(req.body.code);
+    const call_get_token_access = async () => {
+        getAccessTokenDropBox(req.body.access_code).then(response => {
+            //console.log(response);
+            req.session.tokenAccess = response;
+            console.log("session :",req.session.tokenAccess);
+        }).catch(err=>{
+            console.log(err);
+        });
+        
+    }
+    call_get_token_access();
+    
 });
 
 export default Router;

@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import dropboxRouter from "./routes/dropboxRouter.js";
 import AuthRouter from "./routes/auth.js";
 
-const app = express();
+const app = express();          //1 hour
 const Fourhour = 1000 * 60 * 60 * 4;
 //middleware
 app.use(cors());
