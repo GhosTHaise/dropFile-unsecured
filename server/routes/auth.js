@@ -19,6 +19,7 @@ Router.get("/",(req,res) => {
 });
 
 Router.post("/",(req,res) => {
+    console.log("body :",req.body);
     getAccessTokenDropBox(req.body.code);
 });
 

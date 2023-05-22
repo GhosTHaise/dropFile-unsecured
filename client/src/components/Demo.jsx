@@ -7,12 +7,16 @@ const Demo = ({data}) => {
   useEffect(()=>{
     const {code} = data; 
     const request_token_access = async () => {
-        const request = await fetch("",{
-          method : "post",
-          body : {
+        const response = await fetch("http://localhost:8080/api/v1/auth",{
+          method : "POST",
+          headers : {
+            "Content-Type" : "application/json"
+          },
+          body : JSON.stringify({
             access_code  : code,
-          }
+          })
         });
+        //const result = await response.json(); 
     };
     request_token_access();
   },[]);

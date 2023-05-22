@@ -1,6 +1,6 @@
 import queryString from "query-string";
 import * as dotenv from "dotenv";
-
+import fetch from "node-fetch"
 dotenv.config();
 
 /** 
@@ -50,7 +50,10 @@ const getAccessTokenDropBox = async (code) => {
     //Request my access Token
     const response = await fetch(accessTokenUrl,{
         method : "POST",
-        body : requestData
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : new URLSearchParams(requestData)
     })
 
     const data = await response.json();
