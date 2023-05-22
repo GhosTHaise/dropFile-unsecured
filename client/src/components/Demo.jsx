@@ -1,7 +1,21 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 
 const Demo = ({data}) => {
   const [file, setFile] = useState();
+
+  //Request Token
+  useEffect(()=>{
+    const {code} = data; 
+    const request_token_access = async () => {
+        const request = await fetch("",{
+          method : "post",
+          body : {
+            access_code  : code,
+          }
+        });
+    };
+    request_token_access();
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +32,8 @@ const Demo = ({data}) => {
       console.log(error);
     }
   }
+
+  //build function to request an api key
   return (
     <>
       <h1>Drop File</h1>
