@@ -25,8 +25,14 @@ Router.post("/",(req,res) => {
             //console.log(response);
             req.session.tokenAccess = response;
             console.log("session :",req.session.tokenAccess);
+            res.status(200).json({
+                message : "Get Access Token ."
+            })
         }).catch(err=>{
             console.log(err);
+            res.status(400).json({
+                message : "Unable to Get Access Token ."
+            })
         });
         
     }

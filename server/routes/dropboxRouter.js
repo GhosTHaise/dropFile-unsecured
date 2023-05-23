@@ -18,6 +18,7 @@ const Upload = multer({ storage});
 
 //GET
 Router.route("/").get((req,res)=>{
+    console.log(req.session);
     res.status(200).json({
         message : "Hello from GhosT"
     })
