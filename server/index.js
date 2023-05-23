@@ -10,15 +10,15 @@ const app = express();          //1 hour
 const Fourhour = 1000 * 60 * 60 * 4;
 //middleware
 app.use(cors());
+//app.use(cookieParser());
 app.use(express.json());
-app.use(cookieParser());
+
 app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
     cookie: { maxAge: Fourhour },
     resave: false 
 }));
-app
 
 app.use("/api/v1/dropbox",dropboxRouter);
 app.use("/api/v1/auth",AuthRouter);

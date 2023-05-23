@@ -27,7 +27,7 @@ Router.route("/").get((req,res)=>{
 Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
     console.log(req.session.tokenAccess)
     const dbx = new Dropbox({
-        accessToken : req.session.tokenAccess,
+        accessToken : "sl.Be5yoEUiAV9h98W1Unol3XYumhG6ZY4EeySm1ODL61k6DqpBy36U3ZdvYSCyUvYfOWGV4JUUbePZg13uqsnoO4g6YDgMhfz3bdWvG4fqLgWoBFfhjD0L71NHL41tYLOxWVTB-9U",
         //clientId : process.env.DROPBOX_APP_KEY,
         //clientSecret : process.env.DROPBOX_APP_CLIENT
     });
