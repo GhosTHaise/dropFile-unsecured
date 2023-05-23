@@ -16,8 +16,11 @@ app.use(express.json());
 app.use(session({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     saveUninitialized:true,
-    cookie: { maxAge: Fourhour },
-    resave: false 
+    cookie: { 
+        maxAge: Fourhour,
+        secure :false
+    },
+    resave: true 
 }));
 
 app.use("/api/v1/dropbox",dropboxRouter);
