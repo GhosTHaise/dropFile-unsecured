@@ -2,6 +2,7 @@ import express from "express";
 import * as dotenv from "dotenv"; 
 import multer from "multer";
 import fetch from "node-fetch";
+import { createHash } from "crypto";
 dotenv.config();
 
 
@@ -13,12 +14,12 @@ const Upload = multer({ storage});
 Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
     //file to upload
     const file = req.file;
-
+    //console.log(createHash("sha1").update(file.buffer).digest("hex"));
     const HEADERS = {
         "Authorization": process.env.UPLOAD_TOKEN,
         "X-Bz-File-Name": file.filename ,
         "Content-Type": file.mimetype ,
-        "X-Bz-Content-Sha1": "$SHA1_OF_FILE",
+        "X-Bz-Content-Sha1": createHash("sha1").update(file.buffer).digest("hex"),
         "X-Bz-Info-Author": "unknown", 
         "X-Bz-Server-Side-Encryption": "AES256" 
     }
