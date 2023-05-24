@@ -27,7 +27,7 @@ const Demo = ({data}) => {
     const formData = new FormData();
     formData.append("file_upload",file);
     try {
-      await fetch("http://localhost:8080/api/v1/dropbox",{
+      await fetch("http://localhost:8080/api/v1/backblaze",{
         method : "POST",
         body : formData
       });
