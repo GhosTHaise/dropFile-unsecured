@@ -1,10 +1,10 @@
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 
-const Demo = ({data}) => {
+const Demo = () => {
   const [file, setFile] = useState();
 
   //Request Token
-  useEffect(()=>{
+  /* useEffect(()=>{
     const {code} = data; 
     const request_token_access = async () => {
         const response = await fetch("http://localhost:8080/api/v1/auth",{
@@ -19,7 +19,7 @@ const Demo = ({data}) => {
         //const result = await response.json(); 
     };
     request_token_access();
-  },[]);
+  },[]); */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
