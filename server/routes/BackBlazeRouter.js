@@ -4,6 +4,8 @@ import multer from "multer";
 import fetch from "node-fetch";
 import { createHash } from "crypto";
 import { Date_Now_String_For_Dir_Name } from "../utils/index.js";
+import jwt from "jsonwebtoken";
+
 dotenv.config();
 
 
@@ -12,9 +14,14 @@ const Router = express.Router();
 const storage = multer.memoryStorage();
 const Upload = multer({ storage});
 
-Router.route("/").post(Upload.single("file_upload"),(req,res)=>{
+Router.route("/").post(Upload.single("file_upload"), async (req,res)=>{
     //file to upload
+    console.log(req.body);
+    return ;
     const file = req.file;
+    //get info
+    const upload_authorization = jwt.verify(req.jwt_token,process.env.JWT_SECRET_KEY);
+    console.log(upload_authorization);
     //console.log(createHash("sha1").update(file.buffer).digest("hex"));
     const HEADERS = {
         "Authorization": process.env.UPLOAD_TOKEN,

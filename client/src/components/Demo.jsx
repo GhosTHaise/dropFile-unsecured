@@ -1,31 +1,35 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 
 const Demo = () => {
   const [file, setFile] = useState();
-
+  const [jwt_access_token,setJwt_access_token] = useState("")
   //Request Token
-  /* useEffect(()=>{
-    const {code} = data; 
-    const request_token_access = async () => {
-        const response = await fetch("http://localhost:8080/api/v1/auth",{
-          method : "POST",
+  useEffect(()=>{
+    if(window.localStorage.getItem("jwt_access_key")){
+      setJwt_access_token(window.localStorage.getItem("jwt_access_key"));
+    }else{
+      const request_token_access = async () => {
+        const response = await fetch("http://localhost:4000/api/v1/backblaze",{
+          method : "GET",
           headers : {
             "Content-Type" : "application/json"
           },
-          body : JSON.stringify({
-            access_code  : code,
-          })
         });
-        //const result = await response.json(); 
+        const result = await response.json();
+        console.log(result.backblaze_token);
+        window.localStorage.setItem("jwt_access_key",result.backblaze_token[0].token);
+        setJwt_access_token(result.backblaze_token[0].token);
     };
     request_token_access();
-  },[]); */
+    }
+  },[]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("file_upload",file);
+    formData.append("jwt_token",jwt_access_token)
     try {
       await fetch("http://localhost:8080/api/v1/backblaze",{
         method : "POST",
