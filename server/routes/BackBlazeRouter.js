@@ -39,9 +39,14 @@ Router.route("/").post(Upload.single("file_upload"), async (req,res)=>{
                 headers : HEADERS,
                 body : file.buffer
             });
-            console.log(request);
+            //console.log(request);
+            res.status(200).json({
+                message : "Success to upload : "+file.originalname
+            })
         } catch (error) {
-            console.log("error :",error);
+            res.status(400).json({
+                message : error
+            });
         }
     }
 
