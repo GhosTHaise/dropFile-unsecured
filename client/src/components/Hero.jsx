@@ -32,11 +32,12 @@ const Hero = () => {
     formData.append("file_upload",file);
     formData.append("jwt_token",jwt_access_token)
     try {
-      await fetch("http://localhost:8080/api/v1/backblaze",{
+      await fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
         method : "POST",
         body : formData
       });
-      console.log("Success to send file");
+      
+      setFile(null);
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +56,7 @@ const Hero = () => {
               Upload*
           </button>
       </form> */}
-      <Form />
+      <Form file={file} setFile={setFile}  handleSubmit={handleSubmit}  />
     </div>
   )
 }
