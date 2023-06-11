@@ -1,8 +1,11 @@
 import {useState,useEffect} from 'react'
+import Form from './Form';
+import toast from 'react-hot-toast';
 
-const Demo = () => {
+const Hero = () => {
   const [file, setFile] = useState();
-  const [jwt_access_token,setJwt_access_token] = useState("")
+  const [jwt_access_token,setJwt_access_token] = useState("");
+
   //Request Token
   useEffect(()=>{
     if(window.localStorage.getItem("jwt_access_key")){
@@ -31,20 +34,42 @@ const Demo = () => {
     formData.append("file_upload",file);
     formData.append("jwt_token",jwt_access_token)
     try {
-      await fetch("http://localhost:8080/api/v1/backblaze",{
+     /*  await fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
         method : "POST",
         body : formData
-      });
-      console.log("Success to send file");
+      }); */
+      toast.promise(
+        fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
+        method : "POST",
+        body : formData
+      }),
+        {
+          loading: 'Loading',
+          success: () => `Successfully saved ${file.name}`,
+          error: (err) => `This just happened: ${err.toString()}`,
+        },
+        {
+          style: {
+            minWidth: '350px',
+          },
+          success: {
+            duration: 1500,
+            icon: '🔥',
+          },
+        }
+      );
+      
+      setFile(null);
+
     } catch (error) {
-      console.log(error);
+      toast.error("Error : "+error.message);
     }
   }
 
   //build function to request an api key
   return (
-    <>
-      <h1>Drop File</h1>
+    <div className='bg-primary-color min-h-screen w-screen flex justify-center items-center'>
+      {/* <h1>Drop File</h1>
       <form>
           <input 
           type="file" 
@@ -53,9 +78,10 @@ const Demo = () => {
           <button type='submit' onClick={(e)=>handleSubmit(e)}>
               Upload*
           </button>
-      </form>
-    </>
+      </form> */}
+      <Form file={file} setFile={setFile}  handleSubmit={handleSubmit}  />
+    </div>
   )
 }
 
-export default Demo
+export default Hero

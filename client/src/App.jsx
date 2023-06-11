@@ -1,12 +1,11 @@
 import './App.css'
-import { Demo } from './components'
+import { Hero } from './components'
 
 function App() {
 
   return (
     <>
-      <Demo
-      />
+      <Hero />
     </>
   )
 }
