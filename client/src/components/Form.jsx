@@ -13,10 +13,14 @@ const Form = ({ file,setFile,handleSubmit }) => {
         setFile(null)
     }
   return (
-    <div className='w-[480px] h-[300px] bg-white rounded-2xl p-6'>
+    <div className='w-[480px] h-[350px] bg-white rounded-2xl p-6'>
         <form className='bg-primary-color w-full h-full border border-dashed border-gray-700 rounded-xl
             flex flex-col items-center justify-center 
         '>
+            <img 
+                src="/icon-folder.png" 
+                alt="icon-folder" 
+                className='w-[64px] mb-6 h-auto object-contain ' />
             <h4 className='w-2/3 text-center text-gray-600 mb-2'>
                {file?.name ||  "Drag Your Documents,photos or videos here to start uploading."}
             </h4>

@@ -1,9 +1,11 @@
 import {useState,useEffect} from 'react'
 import Form from './Form';
+import toast from 'react-hot-toast';
 
 const Hero = () => {
   const [file, setFile] = useState();
-  const [jwt_access_token,setJwt_access_token] = useState("")
+  const [jwt_access_token,setJwt_access_token] = useState("");
+
   //Request Token
   useEffect(()=>{
     if(window.localStorage.getItem("jwt_access_key")){
@@ -32,14 +34,35 @@ const Hero = () => {
     formData.append("file_upload",file);
     formData.append("jwt_token",jwt_access_token)
     try {
-      await fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
+     /*  await fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
         method : "POST",
         body : formData
-      });
+      }); */
+      toast.promise(
+        fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
+        method : "POST",
+        body : formData
+      }),
+        {
+          loading: 'Loading',
+          success: () => `Successfully saved ${file.name}`,
+          error: (err) => `This just happened: ${err.toString()}`,
+        },
+        {
+          style: {
+            minWidth: '350px',
+          },
+          success: {
+            duration: 1500,
+            icon: '🔥',
+          },
+        }
+      );
       
       setFile(null);
+
     } catch (error) {
-      console.log(error);
+      toast.error("Error : "+error.message);
     }
   }
 
