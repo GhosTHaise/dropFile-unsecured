@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react'
+import Form from './Form';
 
-const Demo = () => {
+const Hero = () => {
   const [file, setFile] = useState();
   const [jwt_access_token,setJwt_access_token] = useState("")
   //Request Token
@@ -43,8 +44,8 @@ const Demo = () => {
 
   //build function to request an api key
   return (
-    <>
-      <h1>Drop File</h1>
+    <div className='bg-primary-color min-h-screen w-screen flex justify-center items-center'>
+      {/* <h1>Drop File</h1>
       <form>
           <input 
           type="file" 
@@ -53,9 +54,10 @@ const Demo = () => {
           <button type='submit' onClick={(e)=>handleSubmit(e)}>
               Upload*
           </button>
-      </form>
-    </>
+      </form> */}
+      <Form />
+    </div>
   )
 }
 
-export default Demo
+export default Hero
