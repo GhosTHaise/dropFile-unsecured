@@ -12,7 +12,7 @@ const Hero = () => {
       setJwt_access_token(window.localStorage.getItem("jwt_access_key"));
     }else{
       const request_token_access = async () => {
-        const response = await fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
+        const response = await fetch("https://relance-api-access-token.onrender.com/api/v1/backblaze",{
           method : "GET",
           headers : {
             "Content-Type" : "application/json"
@@ -39,7 +39,7 @@ const Hero = () => {
         body : formData
       }); */
       toast.promise(
-        fetch("https://dropfile-unsecured.onrender.com/api/v1/backblaze",{
+        fetch("https://relance-api-access-token.onrender.com/api/v1/backblaze",{
         method : "POST",
         body : formData
       }),
